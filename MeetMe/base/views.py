@@ -6,4 +6,4 @@ def home(request):
 
 
 def room(request):
-    return render(request, 'Room.html')
+    return render(request, 'room.html')
