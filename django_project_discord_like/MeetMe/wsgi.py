@@ -1,5 +1,5 @@
 """
-WSGI config for django_project_discord_like project.
+WSGI config for MeetMe project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project_discord_like.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MeetMe.settings')
 
 application = get_wsgi_application()

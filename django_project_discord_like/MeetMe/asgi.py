@@ -1,5 +1,5 @@
 """
-ASGI config for django_project_discord_like project.
+ASGI config for MeetMe project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project_discord_like.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MeetMe.settings')
 
 application = get_asgi_application()
