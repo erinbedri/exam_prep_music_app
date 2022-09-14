@@ -1,6 +1,15 @@
 from django.db import models
 
-# python manage.py makemigrations name_of_app
-# python manage.py migrate
 
+class Room(models.Model):
+    # host =
+    # topic =
+    name = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
+    # participants =
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
