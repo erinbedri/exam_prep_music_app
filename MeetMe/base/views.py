@@ -25,11 +25,14 @@ def login_page(request):
         else:
             messages.error(request, 'Username or password does not match!')
 
-    context = {
-
-    }
+    context = {}
 
     return render(request, 'base/login_register.html', context)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
 
 
 def home(request):
