@@ -30,7 +30,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = ()
 
 PROJECT_APPS = (
-    'base.apps.BaseConfig',
+    'base',
 )
 
 INSTALLED_APPS = (DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS)
