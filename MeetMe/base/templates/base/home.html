@@ -25,7 +25,14 @@
         </div>
 
         <div>
-            <h5>{{ room_count }} rooms available</h5>
+            <h5>{{ room_count }}
+                {% if room_count == 1 %}
+                    room available
+                {% else %}
+                    rooms available
+                {% endif %}
+            </h5>
+
             <a href="{% url 'create-room' %}">Create Room</a>
 
             <div>
