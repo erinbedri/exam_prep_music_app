@@ -10,6 +10,8 @@ from .forms import RoomForm
 
 
 def login_page(request):
+    page = 'login'
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -30,7 +32,9 @@ def login_page(request):
         else:
             messages.error(request, 'Username or password does not match!')
 
-    context = {}
+    context = {
+        'page': page
+    }
 
     return render(request, 'base/login_register.html', context)
 
@@ -38,6 +42,10 @@ def login_page(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
+
+
+def register_user(request):
+    return render(request, 'base/login_register.html')
 
 
 def home(request):
