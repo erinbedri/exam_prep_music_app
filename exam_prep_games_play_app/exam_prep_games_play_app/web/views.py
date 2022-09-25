@@ -1,9 +1,17 @@
 from django.shortcuts import render
 
+from exam_prep_games_play_app.web.models import Profile
+
+
+def get_profile():
+    profile = Profile.objects.all().first()
+    return profile
+
 
 def show_home(request):
-    context = {}
-    return render(request, 'home-page.html', context)
+    profile = get_profile()
+
+    return render(request, 'home-page.html', {'profile': profile})
 
 
 def show_dashboard(request):
