@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from exam_prep_games_play_app.web.forms import CreateProfileForm
-from exam_prep_games_play_app.web.models import Profile
+from exam_prep_games_play_app.web.models import Profile, Game
 
 
 def get_profile():
@@ -16,7 +16,9 @@ def show_home(request):
 
 
 def show_dashboard(request):
-    return render(request, 'dashboard.html')
+    games = Game.objects.all()
+
+    return render(request, 'dashboard.html', {'games': games})
 
 
 def create_game(request):
