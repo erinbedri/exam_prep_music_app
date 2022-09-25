@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from exam_prep_games_play_app.web.forms import CreateProfileForm
 from exam_prep_games_play_app.web.models import Profile
 
 
@@ -35,7 +36,18 @@ def delete_game(request, pk):
 
 
 def create_profile(request):
-    return render(request, 'create-profile.html')
+    if request.method == 'POST':
+        form = CreateProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show home')
+    else:
+        form = CreateProfileForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'create-profile.html', context)
 
 
 def show_profile(request):
