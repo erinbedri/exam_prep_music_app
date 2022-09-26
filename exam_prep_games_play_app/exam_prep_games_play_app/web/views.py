@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from exam_prep_games_play_app.web.forms import CreateProfileForm
+from exam_prep_games_play_app.web.forms import CreateProfileForm, CreateGameForm
 from exam_prep_games_play_app.web.models import Profile, Game
 
 
@@ -16,28 +16,68 @@ def show_home(request):
 
 
 def show_dashboard(request):
+    profile = get_profile()
     games = Game.objects.all()
 
-    return render(request, 'dashboard.html', {'games': games})
+    context = {
+        'profile': profile,
+        'games': games,
+    }
+
+    return render(request, 'dashboard.html', context)
 
 
 def create_game(request):
-    return render(request, 'create-game.html')
+    profile = get_profile()
+
+    if request.method == 'POST':
+        form = CreateGameForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show dashboard')
+    else:
+        form = CreateGameForm()
+
+    context = {
+        'profile': profile,
+        'form': form,
+    }
+    return render(request, 'create-game.html', context)
 
 
 def show_game_details(request, pk):
-    return render(request, 'details-game.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, 'details-game.html', context)
 
 
 def edit_game(request, pk):
-    return render(request, 'edit-game.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile
+    }
+
+    return render(request, 'edit-game.html', context)
 
 
 def delete_game(request, pk):
-    return render(request, 'delete-game.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, 'delete-game.html', context)
 
 
 def create_profile(request):
+    profile = get_profile()
+
     if request.method == 'POST':
         form = CreateProfileForm(request.POST)
         if form.is_valid():
@@ -47,21 +87,41 @@ def create_profile(request):
         form = CreateProfileForm()
 
     context = {
+        'profile': profile,
         'form': form,
     }
+
     return render(request, 'create-profile.html', context)
 
 
 def show_profile(request):
-    return render(request, 'details-profile.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, 'details-profile.html', context)
 
 
 def edit_profile(request):
-    return render(request, 'edit-profile.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, 'edit-profile.html', context)
 
 
 def delete_profile(request):
-    return render(request, 'delete-profile.html')
+    profile = get_profile()
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, 'delete-profile.html', context)
 
 
 

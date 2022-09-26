@@ -1,6 +1,6 @@
 from django import forms
 
-from exam_prep_games_play_app.web.models import Profile
+from exam_prep_games_play_app.web.models import Profile, Game
 
 
 class CreateProfileForm(forms.ModelForm):
@@ -11,3 +11,12 @@ class CreateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('email', 'age', 'password')
+
+
+class CreateGameForm(forms.ModelForm):
+    class Meta:
+        model = Game
+        fields = ('title', 'category', 'rating', 'max_level', 'image', 'summary')
+        labels = {
+            'image': 'Image URL',
+        }
