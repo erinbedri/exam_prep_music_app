@@ -29,3 +29,34 @@ class EditGameForm(forms.ModelForm):
         labels = {
             'image': 'Image URL',
         }
+
+
+class DeleteGameForm(forms.ModelForm):
+    class Meta:
+        model = Game
+        fields = ('title', 'category', 'rating', 'max_level', 'image', 'summary')
+
+        title = forms.CharField(
+            disabled=True,
+        )
+
+        category = forms.CharField(
+            disabled=True,
+        )
+
+        rating = forms.FloatField(
+            disabled=True,
+        )
+
+        max_level = forms.IntegerField(
+            disabled=True,
+        )
+
+        image = forms.URLField(
+            disabled=True,
+        )
+
+        summary = forms.CharField(
+            disabled=True
+        )
+
