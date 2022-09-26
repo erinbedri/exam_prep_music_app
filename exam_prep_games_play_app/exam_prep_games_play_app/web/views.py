@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from exam_prep_games_play_app.web.forms import CreateProfileForm, CreateGameForm, EditGameForm, DeleteGameForm, \
-    EditProfileForm
+    EditProfileForm, DeleteProfileForm
 from exam_prep_games_play_app.web.models import Profile, Game
 
 
@@ -153,9 +153,19 @@ def edit_profile(request):
 
 def delete_profile(request):
     profile = get_profile()
+    games = Game.objects.all()
+
+    if request.method == 'POST':
+        form = DeleteProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            profile.delete()
+            games.delete()
+            return redirect('show home')
+    else:
+        form = DeleteProfileForm(instance=profile)
 
     context = {
-        'profile': profile,
+        'form': form,
     }
 
     return render(request, 'delete-profile.html', context)
