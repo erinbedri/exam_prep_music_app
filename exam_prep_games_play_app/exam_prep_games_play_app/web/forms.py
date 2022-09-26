@@ -13,6 +13,19 @@ class CreateProfileForm(forms.ModelForm):
         fields = ('email', 'age', 'password')
 
 
+class EditProfileForm(forms.ModelForm):
+    # password = forms.CharField(
+    #     widget=forms.PasswordInput()
+    # )
+
+    class Meta:
+        model = Profile
+        fields = ('email', 'age', 'password', 'first_name', 'last_name', 'picture')
+        labels = {
+            'picture': 'Profile Picture',
+        }
+
+
 class CreateGameForm(forms.ModelForm):
     class Meta:
         model = Game
