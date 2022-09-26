@@ -47,9 +47,11 @@ def create_game(request):
 
 def show_game_details(request, pk):
     profile = get_profile()
+    game = Game.objects.get(pk=pk)
 
     context = {
         'profile': profile,
+        'game': game,
     }
 
     return render(request, 'details-game.html', context)
