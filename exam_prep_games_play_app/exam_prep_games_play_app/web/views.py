@@ -120,9 +120,13 @@ def create_profile(request):
 
 def show_profile(request):
     profile = get_profile()
+    games_count = len(Game.objects.all())
+    average_game_rating = sum([g.rating for g in Game.objects.all()])
 
     context = {
         'profile': profile,
+        'games_count': games_count,
+        'average_game_rating': average_game_rating,
     }
 
     return render(request, 'details-profile.html', context)
