@@ -54,6 +54,7 @@ class Album(models.Model):
     name = models.CharField(
         max_length=ALBUM_NAME_CHAR_MAX_LEN,
         unique=True,
+        verbose_name='Album Name',
     )
 
     artist = models.CharField(

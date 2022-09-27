@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from exam_prep_music_app.web.forms import CreateProfileForm
+from exam_prep_music_app.web.forms import CreateProfileForm, CreateAlbumForm
 from exam_prep_music_app.web.models import Profile, Album
 
 
@@ -26,8 +26,19 @@ def show_homepage(request):
 
 
 def add_album(request):
-    context = {
+    profile = get_profile()
 
+    if request.method == 'POST':
+        form = CreateAlbumForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show homepage')
+    else:
+        form = CreateAlbumForm()
+
+    context = {
+        'profile': profile,
+        'form': form,
     }
 
     return render(request, 'add-album.html', context)
