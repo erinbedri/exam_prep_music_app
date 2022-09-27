@@ -10,6 +10,7 @@ urlpatterns = [
     path('album/edit/<int:id>/', views.edit_album, name='edit album page'),
     path('album/delete/<int:id>/', views.delete_album, name='delete album page'),
 
+    path('profile/create/', views.create_profile, name='create profile details page'),
     path('profile/details/', views.show_profile, name='show profile details page'),
     path('profile/delete/', views.delete_profile, name='delete profile page'),
 ]
