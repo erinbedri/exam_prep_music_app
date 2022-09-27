@@ -18,7 +18,7 @@ class Profile(models.Model):
             MinLengthValidator(USERNAME_CHAR_MIN_LEN),
             validate_username_chars,
         ]
-    ),
+    )
 
     email = models.EmailField()
 
