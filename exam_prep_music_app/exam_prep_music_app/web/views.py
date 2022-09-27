@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
-from exam_prep_music_app.web.forms import CreateProfileForm, CreateAlbumForm, EditAlbumForm, DeleteAlbumForm
+from exam_prep_music_app.web.forms import CreateProfileForm, CreateAlbumForm, EditAlbumForm, DeleteAlbumForm, \
+    DeleteProfileForm
 from exam_prep_music_app.web.models import Profile, Album
 
 
@@ -118,8 +119,20 @@ def show_profile(request):
 
 
 def delete_profile(request):
-    context = {
+    profile = get_profile()
+    albums = Album.objects.all()
 
+    if request.method == 'POST':
+        form = DeleteProfileForm(request.POST)
+        if form.is_valid():
+            profile.delete()
+            albums.delete()
+            return redirect('show homepage')
+    else:
+        form = DeleteProfileForm()
+
+    context = {
+        'form': form,
     }
 
     return render(request, 'profile-delete.html', context)

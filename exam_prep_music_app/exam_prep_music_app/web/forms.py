@@ -93,6 +93,9 @@ class DeleteAlbumForm(forms.ModelForm):
         fields = ('name', 'artist', 'genre', 'description', 'image', 'price')
 
 
-
+class DeleteProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ()
 
 
