@@ -52,7 +52,47 @@ class CreateAlbumForm(forms.ModelForm):
         )
     )
 
+    class Meta:
+        model = Album
+        fields = ('name', 'artist', 'genre', 'description', 'image', 'price')
+
+
+class EditAlbumForm(forms.ModelForm):
+    class Meta:
+        model = Album
+        fields = ('name', 'artist', 'genre', 'description', 'image', 'price')
+
+
+class DeleteAlbumForm(forms.ModelForm):
+    name = forms.CharField(
+        disabled=True,
+    )
+
+    artist = forms.CharField(
+        disabled=True,
+    )
+
+    genre = forms.CharField(
+        disabled=True,
+    )
+
+    description = forms.CharField(
+        disabled=True,
+    )
+
+    image = forms.URLField(
+        disabled=True,
+    )
+
+    price = forms.FloatField(
+        disabled=True,
+    )
 
     class Meta:
         model = Album
         fields = ('name', 'artist', 'genre', 'description', 'image', 'price')
+
+
+
+
+

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from exam_prep_music_app.web.forms import CreateProfileForm, CreateAlbumForm
+from exam_prep_music_app.web.forms import CreateProfileForm, CreateAlbumForm, EditAlbumForm, DeleteAlbumForm
 from exam_prep_music_app.web.models import Profile, Album
 
 
@@ -52,16 +52,38 @@ def show_album(request, pk):
 
 
 def edit_album(request, pk):
-    context = {
+    album = Album.objects.get(pk=pk)
 
+    if request.method == 'POST':
+        form = EditAlbumForm(request.POST, instance=album)
+        if form.is_valid():
+            form.save()
+            return redirect('show homepage')
+    else:
+        form = EditAlbumForm(instance=album)
+
+    context = {
+        'form': form,
+        'album': album,
     }
 
     return render(request, 'edit-album.html', context)
 
 
 def delete_album(request, pk):
-    context = {
+    album = Album.objects.get(pk=pk)
 
+    if request.method == 'POST':
+        form = DeleteAlbumForm(request.POST, instance=album)
+        if form.is_valid():
+            album.delete()
+            return redirect('show homepage')
+    else:
+        form = DeleteAlbumForm(instance=album)
+
+    context = {
+        'form': form,
+        'album': album,
     }
 
     return render(request, 'delete-album.html', context)
