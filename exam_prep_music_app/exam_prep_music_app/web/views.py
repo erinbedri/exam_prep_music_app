@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from exam_prep_music_app.web.forms import CreateProfileForm
-from exam_prep_music_app.web.models import Profile
+from exam_prep_music_app.web.models import Profile, Album
 
 
 def get_profile():
@@ -15,8 +15,11 @@ def show_homepage(request):
     if not profile:
         return redirect('create profile')
 
+    albums = Album.objects.all()
+
     context = {
         'profile': profile,
+        'albums': albums,
     }
 
     return render(request, 'home-with-profile.html', context)
@@ -30,7 +33,7 @@ def add_album(request):
     return render(request, 'add-album.html', context)
 
 
-def show_album(request):
+def show_album(request, pk):
     context = {
 
     }
@@ -38,7 +41,7 @@ def show_album(request):
     return render(request, 'album-details.html', context)
 
 
-def edit_album(request):
+def edit_album(request, pk):
     context = {
 
     }
@@ -46,7 +49,7 @@ def edit_album(request):
     return render(request, 'edit-album.html', context)
 
 
-def delete_album(request):
+def delete_album(request, pk):
     context = {
 
     }
