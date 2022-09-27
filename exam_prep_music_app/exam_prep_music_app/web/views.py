@@ -26,8 +26,6 @@ def show_homepage(request):
 
 
 def add_album(request):
-    profile = get_profile()
-
     if request.method == 'POST':
         form = CreateAlbumForm(request.POST)
         if form.is_valid():
@@ -37,7 +35,6 @@ def add_album(request):
         form = CreateAlbumForm()
 
     context = {
-        'profile': profile,
         'form': form,
     }
 
@@ -45,8 +42,10 @@ def add_album(request):
 
 
 def show_album(request, pk):
-    context = {
+    album = Album.objects.get(pk=pk)
 
+    context = {
+        'album': album,
     }
 
     return render(request, 'album-details.html', context)
@@ -85,8 +84,12 @@ def create_profile(request):
 
 
 def show_profile(request):
-    context = {
+    profile = get_profile()
+    album_count = len(Album.objects.all())
 
+    context = {
+        'profile': profile,
+        'album_count': album_count,
     }
 
     return render(request, 'profile-details.html', context)
